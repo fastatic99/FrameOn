@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>FrameOn-Public-Source</AssemblyName>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <ApplicationIcon>Assets/frameon_icon_windows.ico</ApplicationIcon>
+  </PropertyGroup>
+  
+
+  <PropertyGroup Condition="'$(FrameOnWindowsPackage)' == 'MSIX'">
+    <DefineConstants>$(DefineConstants);FRAMEON_MSIX_BUILD</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\PRIVACY.md"
+                      LogicalName="FrameonVideoUtility.Legal.PRIVACY.md" />
+    <EmbeddedResource Include="..\TERMS_OF_USE.md"
+                      LogicalName="FrameonVideoUtility.Legal.TERMS_OF_USE.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="Avalonia.Fonts.Inter" />
+    <PackageReference Include="AvaloniaUI.DiagnosticsSupport">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="FrameonVideoUtility.Tests" />
+  </ItemGroup>
+</Project>

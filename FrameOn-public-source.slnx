@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="FrameonVideoUtility/FrameonVideoUtility.csproj" />
+  <Project Path="FrameonVideoUtility.PublicTests/FrameonVideoUtility.PublicTests.csproj" />
+</Solution>

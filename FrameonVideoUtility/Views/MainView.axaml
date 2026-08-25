@@ -1,0 +1,936 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="using:FrameonVideoUtility.Views"
+             x:Class="FrameonVideoUtility.Views.MainView">
+
+    <UserControl.Styles>
+
+        <!-- BUTTON BASE -->
+        <Style Selector="Button.fill-button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="50"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+            <Setter Property="FocusAdorner" Value="{x:Null}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.18"/>
+                </Transitions>
+            </Setter>
+
+            <!-- Removes default Avalonia button rectangle/chrome -->
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"/>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.fill-button:pointerover">
+            <Setter Property="RenderTransform" Value="scale(1.03)"/>
+        </Style>
+
+        <Style Selector="Button.fill-button:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.95)"/>
+        </Style>
+
+        <Style Selector="Button.fill-button:disabled">
+            <Setter Property="Opacity" Value="0.45"/>
+        </Style>
+
+        <!-- BUTTON SURFACE -->
+        <Style Selector="Border.fill-button-surface">
+            <Setter Property="Background" Value="#4F6F95"/>
+            <Setter Property="CornerRadius" Value="50"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+        </Style>
+
+        <Style Selector="Border.fill-button-surface.secondary">
+            <Setter Property="Background" Value="#3B4F6A"/>
+        </Style>
+
+        <Style Selector="Border.fill-button-surface.update-available-surface">
+            <Setter Property="Background" Value="#10B981"/>
+        </Style>
+
+        <!-- FILL CIRCLE -->
+        <Style Selector="Ellipse.fill-circle">
+            <Setter Property="Width" Value="0"/>
+            <Setter Property="Height" Value="0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Width" Duration="0:0:0.25"/>
+                    <DoubleTransition Property="Height" Duration="0:0:0.25"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.fill-button:pointerover Ellipse.fill-circle">
+            <Setter Property="Width" Value="260"/>
+            <Setter Property="Height" Value="260"/>
+        </Style>
+
+        <!-- BUTTON TEXT -->
+        <Style Selector="TextBlock.fill-button-text">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.22"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.fill-button:pointerover TextBlock.fill-button-text">
+            <Setter Property="Foreground" Value="#1E1B2E"/>
+        </Style>
+
+        <Style Selector="Button.update-available-button:pointerover TextBlock.fill-button-text">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- COMBOBOX HEADERS -->
+        <Style Selector="ComboBoxItem.combo-header">
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="Foreground" Value="#94A3B8"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style Selector="TextBlock.tool-startup-status">
+            <Setter Property="Foreground" Value="#93C5FD"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.18"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="TextBlock.field-label">
+            <Setter Property="Foreground" Value="#CBD5E1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,3"/>
+        </Style>
+
+        <Style Selector="Button.status-action-button">
+            <Setter Property="Background" Value="#3B4F6A"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#6B8DB8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="13,7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="Button.status-action-button:pointerover">
+            <Setter Property="Background" Value="#4F6F95"/>
+        </Style>
+
+
+<Style Selector="ToggleButton.toggle-pill">
+    <Setter Property="Background" Value="#4F6F95"/>
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="CornerRadius" Value="50"/>
+    <Setter Property="Padding" Value="16,8"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="ClipToBounds" Value="True"/>
+    <Setter Property="Transitions">
+        <Transitions>
+            <BrushTransition Property="Background" Duration="0:0:0.18"/>
+            <BrushTransition Property="BorderBrush" Duration="0:0:0.18"/>
+        </Transitions>
+    </Setter>
+    <Setter Property="Template">
+        <ControlTemplate>
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    ClipToBounds="True">
+                <Grid ClipToBounds="True">
+                    <Ellipse Classes="toggle-fill-circle"
+                             Fill="#C084FC"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"/>
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      Margin="{TemplateBinding Padding}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </Setter>
+</Style>
+
+<Style Selector="ToggleButton.toggle-pill:pointerover">
+    <Setter Property="Background" Value="#4F6F95"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+</Style>
+
+<Style Selector="ToggleButton.toggle-pill:checked">
+    <Setter Property="Background" Value="#0B84FF"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+</Style>
+
+<Style Selector="ToggleButton.toggle-pill:checked:pointerover">
+    <Setter Property="Background" Value="#1D9BFF"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+</Style>
+
+<Style Selector="Ellipse.toggle-fill-circle">
+    <Setter Property="Width" Value="0"/>
+    <Setter Property="Height" Value="0"/>
+    <Setter Property="Opacity" Value="0.95"/>
+    <Setter Property="Transitions">
+        <Transitions>
+            <DoubleTransition Property="Width" Duration="0:0:0.25"/>
+            <DoubleTransition Property="Height" Duration="0:0:0.25"/>
+        </Transitions>
+    </Setter>
+</Style>
+
+<Style Selector="ToggleButton.toggle-pill:pointerover Ellipse.toggle-fill-circle">
+    <Setter Property="Width" Value="260"/>
+    <Setter Property="Height" Value="260"/>
+</Style>
+
+        <Style Selector="ProgressBar.tool-prep-progress">
+            <Setter Property="Height" Value="5"/>
+            <Setter Property="MinWidth" Value="340"/>
+            <Setter Property="Background" Value="#1B2A3B"/>
+            <Setter Property="Foreground" Value="#C084FC"/>
+            <Setter Property="CornerRadius" Value="3"/>
+        </Style>
+
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="76,*">
+
+<Border Background="#243447" Padding="24,0">
+    <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="10">
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="FrameOn Video Utility - Community Edition"
+                       FontSize="24"
+                       FontWeight="SemiBold"/>
+            <TextBlock x:Name="ToolStartupStatusTextBlock"
+                       Classes="tool-startup-status"
+                       Text=""
+                       IsVisible="False"/>
+        </StackPanel>
+
+        <Button x:Name="TopUpdateButton"
+                Grid.Column="1"
+                AutomationProperties.AutomationId="Main.UpdateAvailable"
+                AutomationProperties.Name="Update Available"
+                Classes="fill-button update-available-button"
+                Width="150"
+                Height="38"
+                IsVisible="False">
+            <Border Classes="fill-button-surface update-available-surface">
+                <Grid ClipToBounds="True">
+                    <Ellipse Classes="fill-circle"
+                             Fill="#8B5CF6"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"/>
+                    <TextBlock Classes="fill-button-text"
+                               Text="Update Available"
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+        </Button>
+
+        <ToggleButton x:Name="AdvancedDownloadOptionsToggleButton"
+                      Grid.Column="3"
+                      AutomationProperties.AutomationId="Main.Advanced"
+                      AutomationProperties.Name="Advanced"
+                      Classes="toggle-pill"
+                      Width="120"
+                      Height="38"
+                      IsVisible="False"
+                      IsEnabled="False"
+                      Content="Advanced"/>
+
+        <Button x:Name="SettingsButton"
+                Grid.Column="4"
+                AutomationProperties.AutomationId="Main.Settings"
+                AutomationProperties.Name="Settings"
+                Classes="fill-button"
+                Width="120"
+                Height="38">
+            <Border Classes="fill-button-surface">
+                <Grid ClipToBounds="True">
+                    <Ellipse Classes="fill-circle"
+                             Fill="#C084FC"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"/>
+                    <TextBlock Classes="fill-button-text"
+                               Text="Settings"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+        </Button>
+
+        <Button x:Name="DebugButton"
+                AutomationProperties.AutomationId="Main.Debug"
+                AutomationProperties.Name="Debug"
+                Grid.Column="5"
+                Classes="fill-button"
+                Width="92"
+                Height="38">
+            <Button.Flyout>
+                <MenuFlyout>
+                <MenuItem x:Name="OpenDebugWindowMenuItem"
+                          AutomationProperties.AutomationId="Debug.OpenWindow"
+                          AutomationProperties.Name="Open Debug Window"
+                          Header="Open Debug Window"/>
+                <MenuItem x:Name="SaveLogsMenuItem"
+                          AutomationProperties.AutomationId="Debug.SaveLogs"
+                          AutomationProperties.Name="Save Logs"
+                          Header="Save Logs"/>
+                </MenuFlyout>
+            </Button.Flyout>
+            <Border Classes="fill-button-surface">
+                <Grid ClipToBounds="True">
+                    <Ellipse Classes="fill-circle"
+                             Fill="#93C5FD"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"/>
+                    <TextBlock Classes="fill-button-text"
+                               Text="Debug"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+        </Button>
+    </Grid>
+</Border>
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+        <!-- Download Custom Video -->
+        <Border Grid.Row="1"
+                Margin="20,10"
+                Background="#2F4058"
+                CornerRadius="18"
+                Padding="14">
+
+            <StackPanel Spacing="6">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <TextBlock Text="Download Custom Video"
+                               FontSize="18"
+                               FontWeight="SemiBold"/>
+
+                    <Border x:Name="SimpleDownloadQualityBadge"
+                            Grid.Column="1"
+                            Background="#26384E"
+                            BorderBrush="#47698E"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="10,5"
+                            VerticalAlignment="Center">
+                        <TextBlock Text="Quality: Auto (Recommended)"
+                                   Foreground="#CBD5E1"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"/>
+                    </Border>
+                </Grid>
+
+                <Grid x:Name="DownloadControlsGrid"
+                      Grid.Row="1"
+                      ColumnDefinitions="Auto,*,Auto"
+                      ColumnSpacing="12"
+                      HorizontalAlignment="Stretch">
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Classes="field-label" Text="File format"/>
+                        <ComboBox x:Name="FormatComboBox"
+                                  AutomationProperties.AutomationId="Download.Format"
+                                  AutomationProperties.Name="Download file format"
+                                  Width="220"
+                                  SelectedIndex="1"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Classes="field-label" Text="Video URL"/>
+                        <TextBox x:Name="VideoUrlTextBox"
+                                 AutomationProperties.AutomationId="Download.VideoUrl"
+                                 AutomationProperties.Name="Video URL"
+                                 MinWidth="280"
+                                 HorizontalAlignment="Stretch"
+                                 PlaceholderText="Paste video URL here"/>
+                    </StackPanel>
+
+                <StackPanel x:Name="DownloadActionsPanel"
+                            Grid.Column="2"
+                            Orientation="Horizontal"
+                            Spacing="8"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom">
+                    <Button x:Name="DownloadVideoButton"
+                            AutomationProperties.AutomationId="Download.Start"
+                            AutomationProperties.Name="Download"
+                            Classes="fill-button"
+                            Width="120"
+                            Height="38">
+                        <Border Classes="fill-button-surface">
+                            <Grid ClipToBounds="True">
+                                <Ellipse Classes="fill-circle"
+                                         Fill="#C084FC"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                                <TextBlock Classes="fill-button-text"
+                                           Text="Download"
+                                           FontWeight="SemiBold"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </Button>
+
+                    <Button x:Name="CancelDownloadButton"
+                            AutomationProperties.AutomationId="Download.Cancel"
+                            AutomationProperties.Name="Cancel Download"
+                            Classes="fill-button"
+                            Width="120"
+                            Height="38">
+                        <Border Classes="fill-button-surface secondary">
+                            <Grid ClipToBounds="True">
+                                <Ellipse Classes="fill-circle"
+                                         Fill="#94A3B8"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                                <TextBlock Classes="fill-button-text"
+                                           Text="Cancel"
+                                           FontWeight="SemiBold"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </Button>
+                </StackPanel>
+                </Grid>
+
+                <Border x:Name="AdvancedDownloadOptionsPanel"
+                        Grid.Row="2"
+                        Background="#26384E"
+                        BorderBrush="#47698E"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="10"
+                        IsVisible="False"
+                        IsEnabled="False">
+                    <Grid ColumnDefinitions="150,Auto,*" ColumnSpacing="10">
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Classes="field-label" Text="Quality"/>
+                            <ComboBox x:Name="QualityComboBox"
+                                      AutomationProperties.AutomationId="Download.Quality"
+                                      AutomationProperties.Name="Download quality"
+                                      SelectedIndex="0">
+                                <ComboBoxItem Content="Recommended"/>
+                                <ComboBoxItem Content="Highest"/>
+                                <ComboBoxItem Content="8K (4320p)"/>
+                                <ComboBoxItem Content="4K (2160p)"/>
+                                <ComboBoxItem Content="1440p"/>
+                                <ComboBoxItem Content="1080p"/>
+                                <ComboBoxItem Content="720p"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <CheckBox x:Name="ForceFormatCheckBox"
+                                  AutomationProperties.AutomationId="Download.ForceFormat"
+                                  AutomationProperties.Name="Force selected format"
+                                  Grid.Column="1"
+                                  Content="Force selected format"
+                                  VerticalAlignment="Center"/>
+
+                        <TextBlock Grid.Column="2"
+                                   Text="Advanced checks the video's quality options first, then lets you continue when you are ready."
+                                   Foreground="#6EE7B7"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"
+                                   TextWrapping="Wrap"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <TextBlock x:Name="DownloadDestinationTextBlock"
+                           Grid.Row="5"
+                           Text="Video will download into the selected local folder. Audio formats will extract audio only."
+                           Foreground="#CBD5E1"
+                           FontSize="13"/>
+
+                <TextBlock x:Name="DownloadFormatHelpTextBlock"
+                           Grid.Row="6"
+                           Text="Uses the recommended quality and MP4 format."
+                           Foreground="#AFC4DA"
+                           FontSize="13"
+                           TextWrapping="Wrap"/>
+
+                <TextBlock x:Name="DownloadErrorTextBlock"
+                           Grid.Row="7"
+                           Text=""
+                           Foreground="#FCA5A5"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           TextWrapping="Wrap"
+                           IsVisible="False"/>
+
+                <StackPanel x:Name="DownloadStatusPanel"
+                            Grid.Row="8"
+                            Spacing="8"
+                            IsVisible="False"
+                            Margin="0,10,0,0">
+
+                    <TextBlock x:Name="DownloadStatusTextBlock"
+                               Text="Preparing video..."
+                               Foreground="#E0F2FE"
+                               FontSize="15"
+                               FontWeight="SemiBold"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap"
+                               LineHeight="23"/>
+
+                    <StackPanel x:Name="DownloadCompletedActionsPanel"
+                                Orientation="Horizontal"
+                                Spacing="8"
+                                IsVisible="False">
+                        <Button x:Name="ContinueDownloadAfterInspectionButton"
+                                AutomationProperties.AutomationId="Download.ContinueAfterInspection"
+                                AutomationProperties.Name="Continue download"
+                                Classes="status-action-button"
+                                Content="Continue Download"
+                                IsVisible="False"/>
+                        <Button x:Name="ShowDownloadedFileButton"
+                                AutomationProperties.AutomationId="Download.ShowOutput"
+                                AutomationProperties.Name="Show downloaded file"
+                                Classes="status-action-button"
+                                Content="Show File"
+                                IsVisible="False"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Audio Converter -->
+        <Border Grid.Row="2"
+                Margin="20,0,20,10"
+                Background="#2F4058"
+                CornerRadius="18"
+                Padding="16">
+
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="8">
+                <TextBlock Text="Audio Converter"
+                           FontSize="18"
+                           FontWeight="SemiBold"/>
+
+                <Grid Grid.Row="1"
+                      ColumnDefinitions="*,Auto,140,Auto,Auto"
+                      ColumnSpacing="10">
+
+                    <TextBlock x:Name="SelectedConvertFileNameTextBlock"
+                               Grid.Column="0"
+                               Text="No file selected"
+                               Foreground="#CBD5E1"
+                               VerticalAlignment="Center"
+                               TextTrimming="CharacterEllipsis"/>
+
+                    <Button x:Name="SelectConvertFileButton"
+                            Grid.Column="1"
+                            AutomationProperties.AutomationId="AudioConversion.Browse"
+                            AutomationProperties.Name="Choose an audio or video file"
+                            Content="Browse"/>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Classes="field-label" Text="File format"/>
+                        <ComboBox x:Name="AudioOutputCodecComboBox"
+                                  AutomationProperties.AutomationId="AudioConversion.Format"
+                                  AutomationProperties.Name="Audio output format"
+                                  SelectedIndex="0">
+                            <ComboBoxItem Content="MP3"/>
+                            <ComboBoxItem Content="WAV"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <Button x:Name="ConvertAudioButton"
+                            Grid.Column="3"
+                            AutomationProperties.AutomationId="AudioConversion.Start"
+                            AutomationProperties.Name="Convert audio"
+                            Classes="fill-button"
+                            Width="120"
+                            Height="38">
+                        <Border Classes="fill-button-surface">
+                            <Grid ClipToBounds="True">
+                                <Ellipse Classes="fill-circle"
+                                         Fill="#C084FC"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                                <TextBlock Classes="fill-button-text"
+                                           Text="Convert"
+                                           FontWeight="SemiBold"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </Button>
+
+                    <Button x:Name="CancelAudioConvertButton"
+                            Grid.Column="4"
+                            AutomationProperties.AutomationId="AudioConversion.Cancel"
+                            AutomationProperties.Name="Cancel audio conversion"
+                            Classes="fill-button"
+                            Width="120"
+                            Height="38">
+                        <Border Classes="fill-button-surface secondary">
+                            <Grid ClipToBounds="True">
+                                <Ellipse Classes="fill-circle"
+                                         Fill="#94A3B8"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                                <TextBlock Classes="fill-button-text"
+                                           Text="Cancel"
+                                           FontWeight="SemiBold"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </Button>
+                </Grid>
+
+                <TextBlock Grid.Row="2"
+                           Text="Select a video or audio file. Video files can be extracted to audio; audio files can be converted between audio formats."
+                           Foreground="#CBD5E1"
+                           FontSize="13"/>
+
+                <TextBlock x:Name="AudioConvertErrorTextBlock"
+                           Grid.Row="3"
+                           Text=""
+                           Foreground="#FCA5A5"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           TextWrapping="Wrap"
+                           IsVisible="False"/>
+
+                <StackPanel x:Name="AudioConvertStatusPanel"
+                            Grid.Row="4"
+                            Spacing="8"
+                            IsVisible="False"
+                            Margin="0,10,0,0">
+
+                    <TextBlock x:Name="AudioConvertStatusTextBlock"
+                               Text="Preparing file..."
+                               Foreground="#E0F2FE"
+                               FontSize="16"
+                               FontWeight="SemiBold"/>
+
+                    <StackPanel x:Name="AudioConvertCompletedActionsPanel"
+                                Orientation="Horizontal"
+                                Spacing="8"
+                                IsVisible="False">
+                        <Button x:Name="ShowAudioConvertedFileButton"
+                                AutomationProperties.AutomationId="AudioConversion.ShowOutput"
+                                AutomationProperties.Name="Show converted audio file"
+                                Classes="status-action-button"
+                                Content="Show File"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Video Converter -->
+        <Border Grid.Row="3"
+                Margin="20,0,20,10"
+                Background="#2F4058"
+                CornerRadius="18"
+                Padding="16">
+
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="8">
+                <TextBlock Text="Video Converter"
+                           FontSize="18"
+                           FontWeight="SemiBold"/>
+
+                <Grid Grid.Row="1"
+                      ColumnDefinitions="*,Auto,140,Auto,Auto"
+                      ColumnSpacing="10">
+
+                    <TextBlock x:Name="SelectedVideoConvertFileNameTextBlock"
+                               Grid.Column="0"
+                               Text="No file selected"
+                               Foreground="#CBD5E1"
+                               VerticalAlignment="Center"
+                               TextTrimming="CharacterEllipsis"/>
+
+                    <Button x:Name="SelectVideoConvertFileButton"
+                            Grid.Column="1"
+                            AutomationProperties.AutomationId="VideoConversion.Browse"
+                            AutomationProperties.Name="Choose a video file"
+                            Content="Browse"/>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Classes="field-label" Text="File format"/>
+                        <ComboBox x:Name="VideoOutputFormatComboBox"
+                                  AutomationProperties.AutomationId="VideoConversion.Format"
+                                  AutomationProperties.Name="Video output format"
+                                  SelectedIndex="0">
+                            <ComboBoxItem Content="MP4"/>
+                            <ComboBoxItem Content="MKV"/>
+                            <ComboBoxItem Content="WebM"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <Button x:Name="ConvertVideoFormatButton"
+                            Grid.Column="3"
+                            AutomationProperties.AutomationId="VideoConversion.Start"
+                            AutomationProperties.Name="Convert video"
+                            Classes="fill-button"
+                            Width="120"
+                            Height="38">
+                        <Border Classes="fill-button-surface">
+                            <Grid ClipToBounds="True">
+                                <Ellipse Classes="fill-circle"
+                                         Fill="#C084FC"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                                <TextBlock Classes="fill-button-text"
+                                           Text="Convert"
+                                           FontWeight="SemiBold"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </Button>
+
+                    <Button x:Name="CancelVideoConvertButton"
+                            Grid.Column="4"
+                            AutomationProperties.AutomationId="VideoConversion.Cancel"
+                            AutomationProperties.Name="Cancel video conversion"
+                            Classes="fill-button"
+                            Width="120"
+                            Height="38">
+                        <Border Classes="fill-button-surface secondary">
+                            <Grid ClipToBounds="True">
+                                <Ellipse Classes="fill-circle"
+                                         Fill="#94A3B8"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                                <TextBlock Classes="fill-button-text"
+                                           Text="Cancel"
+                                           FontWeight="SemiBold"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </Button>
+                </Grid>
+
+                <TextBlock Grid.Row="2"
+                           Text="Select a video file and choose the output video format."
+                           Foreground="#CBD5E1"
+                           FontSize="13"/>
+
+                <TextBlock x:Name="VideoConvertErrorTextBlock"
+                           Grid.Row="3"
+                           Text=""
+                           Foreground="#FCA5A5"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           TextWrapping="Wrap"
+                           IsVisible="False"/>
+
+                <StackPanel x:Name="VideoConvertStatusPanel"
+                            Grid.Row="4"
+                            Spacing="8"
+                            IsVisible="False"
+                            Margin="0,10,0,0">
+
+                    <TextBlock x:Name="VideoConvertStatusTextBlock"
+                               Text="Preparing video..."
+                               Foreground="#E0F2FE"
+                               FontSize="16"
+                               FontWeight="SemiBold"/>
+
+                    <StackPanel x:Name="VideoConvertCompletedActionsPanel"
+                                Orientation="Horizontal"
+                                Spacing="8"
+                                IsVisible="False">
+                        <Button x:Name="ShowVideoConvertedFileButton"
+                                AutomationProperties.AutomationId="VideoConversion.ShowOutput"
+                                AutomationProperties.Name="Show converted video file"
+                                Classes="status-action-button"
+                                Content="Show File"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="4"
+                Background="#1E293B"
+                Padding="20,8"
+                VerticalAlignment="Bottom">
+            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,*" ColumnSpacing="10">
+                <Button x:Name="OpenLicensesButton"
+                        AutomationProperties.AutomationId="Main.Licenses"
+                        AutomationProperties.Name="Licenses"
+                        Classes="fill-button"
+                        Width="128"
+                        Height="34"
+                        HorizontalAlignment="Left">
+                    <Border Classes="fill-button-surface secondary">
+                        <Grid ClipToBounds="True">
+                            <Ellipse Classes="fill-circle"
+                                     Fill="#94A3B8"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
+                            <TextBlock Classes="fill-button-text"
+                                       Text="Licenses"
+                                       FontWeight="SemiBold"
+                                       FontSize="13"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </Button>
+
+                <Button x:Name="OpenWikiButton"
+                        AutomationProperties.AutomationId="Main.Wiki"
+                        AutomationProperties.Name="Wiki"
+                        Grid.Column="1"
+                        Classes="fill-button"
+                        Width="128"
+                        Height="34"
+                        HorizontalAlignment="Left">
+                    <Border Classes="fill-button-surface secondary">
+                        <Grid ClipToBounds="True">
+                            <Ellipse Classes="fill-circle"
+                                     Fill="#94A3B8"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
+                            <TextBlock Classes="fill-button-text"
+                                       Text="Wiki"
+                                       FontWeight="SemiBold"
+                                       FontSize="13"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </Button>
+
+                <Button x:Name="OpenWebsiteButton"
+                        AutomationProperties.AutomationId="Main.Website"
+                        AutomationProperties.Name="Open FrameOn website"
+                        Grid.Column="2"
+                        Classes="fill-button"
+                        Width="128"
+                        Height="34"
+                        HorizontalAlignment="Left">
+                    <Border Classes="fill-button-surface secondary">
+                        <Grid ClipToBounds="True">
+                            <Ellipse Classes="fill-circle"
+                                     Fill="#94A3B8"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
+                            <TextBlock Classes="fill-button-text"
+                                       Text="Website"
+                                       FontWeight="SemiBold"
+                                       FontSize="13"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </Button>
+
+                <Button x:Name="OpenRepositoryButton"
+                        AutomationProperties.AutomationId="Main.Repository"
+                        AutomationProperties.Name="Open FrameOn repository"
+                        Grid.Column="4"
+                        Classes="fill-button"
+                        Width="42"
+                        Height="34"
+                        HorizontalAlignment="Left">
+                    <Border Background="Transparent"
+                            CornerRadius="4"
+                            ClipToBounds="True">
+                        <Path Width="24"
+                              Height="24"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Stretch="Uniform"
+                              Fill="White"
+                              Data="M8 0C3.58 0 0 3.64 0 8.13c0 3.59 2.29 6.64 5.47 7.71.4.08.55-.18.55-.39 0-.19-.01-.83-.01-1.51-2.23.49-2.7-.96-2.7-.96-.36-.93-.89-1.18-.89-1.18-.73-.51.05-.5.05-.5.8.06 1.22.83 1.22.83.71 1.23 1.87.88 2.33.67.07-.52.28-.88.51-1.08-1.78-.21-3.64-.91-3.64-4.02 0-.89.31-1.61.82-2.18-.08-.21-.36-1.04.08-2.15 0 0 .67-.22 2.2.83A7.5 7.5 0 0 1 8 3.84a7.5 7.5 0 0 1 2 .27c1.53-1.05 2.2-.83 2.2-.83.44 1.11.16 1.94.08 2.15.51.57.82 1.29.82 2.18 0 3.12-1.87 3.81-3.65 4.01.29.25.54.75.54 1.51 0 1.09-.01 1.97-.01 2.24 0 .21.15.47.55.39A8.14 8.14 0 0 0 16 8.13C16 3.64 12.42 0 8 0z"/>
+                    </Border>
+                </Button>
+            </Grid>
+        </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+
+        <Border x:Name="SettingsOverlay"
+                Grid.RowSpan="2"
+                Background="#DD182536"
+                IsVisible="False"
+                ZIndex="18">
+            <Grid>
+                <views:SettingsPanel x:Name="EmbeddedSettingsPanel"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <Border x:Name="ToolsLoadingOverlay"
+                Grid.RowSpan="2"
+                Background="#DD182536"
+                IsVisible="False"
+                ZIndex="20">
+            <Border Width="500"
+                    MaxWidth="500"
+                    Padding="26"
+                    Background="#243447"
+                    BorderBrush="#4F6F95"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                <Grid RowDefinitions="Auto,Auto,Auto"
+                      RowSpacing="8">
+                    <TextBlock Text="Getting tools ready"
+                               FontSize="22"
+                               FontWeight="SemiBold"/>
+
+                    <TextBlock Grid.Row="1"
+                               Text="This can take a moment on slower machines."
+                               Foreground="#CBD5E1"
+                               FontSize="13"
+                               TextWrapping="Wrap"/>
+
+                    <ProgressBar Grid.Row="2"
+                                 Classes="tool-prep-progress"
+                                 IsIndeterminate="True"
+                                 Margin="0,10,0,0"/>
+                </Grid>
+            </Border>
+        </Border>
+
+
+    </Grid>
+</UserControl>

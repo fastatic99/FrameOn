@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="FrameonVideoUtility.Views.DebugWindow"
+        Title="Debug Terminal"
+        Width="800"
+        Height="500"
+        Background="#0F172A">
+
+    <Grid Margin="20" RowDefinitions="Auto,*">
+        <TextBlock Text="Debug Terminal"
+                   Foreground="White"
+                   FontSize="24"
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,14"/>
+
+        <TextBox x:Name="DebugLogTextBox"
+                 AutomationProperties.AutomationId="Debug.Log"
+                 AutomationProperties.Name="Debug log"
+                 Grid.Row="1"
+                 AcceptsReturn="True"
+                 IsReadOnly="True"
+                 TextWrapping="Wrap"
+                 Background="#020617"
+                 Foreground="#E5E7EB"
+                 FontFamily="Consolas"
+                 FontSize="13"
+                 Padding="12"/>
+    </Grid>
+</Window>

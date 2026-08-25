@@ -1,0 +1,86 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="FrameonVideoUtility.Views.WikiWindow"
+        Title="FrameOn Wiki"
+        Width="680"
+        Height="620"
+        MinWidth="560"
+        MinHeight="460"
+        CanResize="True"
+        Background="#1E293B">
+
+    <Window.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="TextBlock.section-title">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+
+        <Style Selector="TextBlock.body-text">
+            <Setter Property="Foreground" Value="#CBD5E1"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="LineHeight" Value="20"/>
+        </Style>
+
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#4F6F95"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#6B8DB8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Styles>
+
+    <Border Margin="20"
+            Padding="20"
+            Background="#243447"
+            BorderBrush="#4F6F95"
+            BorderThickness="1"
+            CornerRadius="8">
+        <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="14">
+            <StackPanel Spacing="4">
+                <TextBlock Text="FrameOn Wiki"
+                           FontSize="24"
+                           FontWeight="SemiBold"/>
+                           Foreground="#CBD5E1"
+                           FontSize="13"/>
+            </StackPanel>
+
+            <Border Grid.Row="1"
+                    Height="1"
+                    Background="#3B4F6A"/>
+
+            <ScrollViewer Grid.Row="2">
+                <StackPanel Spacing="10">
+                    <TextBlock Classes="section-title" Text="Download A Video"/>
+                    <TextBlock Classes="body-text" Text="Paste a video URL, choose the file format, then select Download. FrameOn will suggest a file name and ask where to save the finished file."/>
+                    <TextBlock Classes="body-text" Text="The default format is MP4 because it is the most compatible choice for QuickTime, Windows media apps, browsers, and common players."/>
+
+                    <TextBlock Classes="section-title" Text="Quality"/>
+                    <TextBlock Classes="body-text" Text="Auto chooses a quality that works well for most videos and devices. Turn on Advanced to request 1080p, 4K, or the highest available quality."/>
+
+                    <TextBlock Classes="section-title" Text="Advanced Downloads"/>
+                    <TextBlock Classes="body-text" Text="Force selected format asks FrameOn to use the file format you chose. If the video does not support that format, the download may fail instead of choosing another format."/>
+                    <TextBlock Classes="body-text" Text="Highest downloads the best quality available. It can create larger files and may not play on some older devices."/>
+
+                    <TextBlock Classes="section-title" Text="Conversion"/>
+                    <TextBlock Classes="body-text" Text="Use Audio Converter to create an audio file from a video or audio file. Use Video Converter to change a video to another file format."/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Button x:Name="CloseButton"
+                    AutomationProperties.AutomationId="Wiki.Close"
+                    AutomationProperties.Name="Close Wiki"
+                    Grid.Row="3"
+                    Content="Close"
+                    Width="92"
+                    HorizontalAlignment="Right"/>
+        </Grid>
+    </Border>
+</Window>
