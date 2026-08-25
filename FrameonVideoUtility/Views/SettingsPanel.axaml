@@ -1,0 +1,123 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="FrameonVideoUtility.Views.SettingsPanel">
+
+    <UserControl.Styles>
+        <Style Selector="Button.settings-button">
+            <Setter Property="Background" Value="#4F6F95"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#6B8DB8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="12,7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="Button.settings-button:pointerover">
+            <Setter Property="Background" Value="#5F83AD"/>
+            <Setter Property="BorderBrush" Value="#93C5FD"/>
+        </Style>
+
+        <Style Selector="Button.icon-button">
+            <Setter Property="Width" Value="36"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Background" Value="#2B4058"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#5F83AD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="Button.icon-button:pointerover">
+            <Setter Property="Background" Value="#4F6F95"/>
+            <Setter Property="BorderBrush" Value="#93C5FD"/>
+        </Style>
+
+        <Style Selector="ComboBox">
+            <Setter Property="Background" Value="#1F2A3A"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#4F6F95"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="MinHeight" Value="34"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="TextBlock.muted">
+            <Setter Property="Foreground" Value="#CBD5E1"/>
+        </Style>
+
+        <Style Selector="Border.settings-section">
+            <Setter Property="Background" Value="#30465E"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="BorderBrush" Value="#3F5875"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Border Width="600"
+            MaxWidth="600"
+            Background="#223248"
+            BorderBrush="#5F83AD"
+            BorderThickness="1"
+            CornerRadius="12"
+            Padding="22">
+        <Grid RowDefinitions="Auto,*" RowSpacing="18">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="18">
+                <StackPanel Spacing="3">
+                    <TextBlock Text="Settings"
+                               FontSize="24"
+                               FontWeight="Bold"/>
+                    <TextBlock Classes="muted"
+                               Text="Tune conversion load and download behavior."
+                               FontSize="13"/>
+                </StackPanel>
+
+                <Button x:Name="CloseSettingsPanelButton"
+                        Grid.Column="1"
+                        Classes="icon-button"
+                        VerticalAlignment="Top">
+                    <TextBlock Text="X"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               LineHeight="16"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Button>
+            </Grid>
+
+            <Border Grid.Row="1"
+                    Classes="settings-section">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="Performance"
+                               FontSize="17"
+                               FontWeight="Bold"/>
+
+                    <Grid ColumnDefinitions="Auto,*">
+                        <TextBlock Text="Conversion Impact:"
+                                   VerticalAlignment="Center"/>
+                        <ComboBox x:Name="ConversionPerformanceComboBox"
+                                  Grid.Column="1"
+                                  Width="250"
+                                  HorizontalAlignment="Right"/>
+                    </Grid>
+
+                    <TextBlock x:Name="ConversionPerformanceHelpText"
+                               Classes="muted"
+                               Text=""
+                               FontSize="12"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

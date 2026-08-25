@@ -1,0 +1,134 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="FrameonVideoUtility.Views.LicensesWindow"
+        Title="FrameOn Licenses"
+        Width="540"
+        Height="520"
+        MinWidth="500"
+        MinHeight="480"
+        CanResize="True"
+        WindowStartupLocation="CenterOwner"
+        Background="#1E293B">
+
+    <Window.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#4F6F95"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#6B8DB8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Styles>
+
+    <Border Margin="20"
+            Padding="20"
+            Background="#243447"
+            BorderBrush="#4F6F95"
+            BorderThickness="1"
+            CornerRadius="8">
+        <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="14">
+            <StackPanel Spacing="4">
+                <TextBlock Text="Licenses"
+                           FontSize="24"
+                           FontWeight="SemiBold"/>
+                <TextBlock Text="Third-party notices and usage responsibility"
+                           Foreground="#CBD5E1"
+                           FontSize="13"/>
+            </StackPanel>
+
+            <Border Grid.Row="1"
+                    Height="1"
+                    Background="#3B4F6A"/>
+
+            <TabControl Grid.Row="2">
+                <TabItem Header="Overview">
+                    <ScrollViewer Margin="0,12,0,0">
+                        <StackPanel Spacing="14">
+                    <TextBlock Text="Use of FrameOn"
+                               FontSize="16"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="By continuing to use FrameOn, you agree to these terms and conditions. Use FrameOn only with media you own, created, have permission to use, or are otherwise authorized to download or convert. You are responsible for following copyright law, site terms, DRM restrictions, and any other applicable rules."
+                               Foreground="#CBD5E1"
+                               TextWrapping="Wrap"/>
+
+                    <TextBlock Text="User responsibility"
+                               FontSize="16"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="You are solely responsible for how you use FrameOn and any output you create with it. By continuing to use this tool, you agree not to hold the developer, publisher, or contributors liable for claims, damages, losses, or wrongdoing arising from your misuse of the app, your violation of third-party terms, or your violation of applicable law."
+                               Foreground="#CBD5E1"
+                               TextWrapping="Wrap"/>
+
+                    <TextBlock Text="FrameOn license"
+                               FontSize="16"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="FrameOn and its official releases are proprietary. Source code published in FrameOn's official public repository is provided separately under the Apache License 2.0 and may differ from an official release. It is provided as-is without guaranteed support or warranty. Modified versions must not be presented as official or endorsed by FrameOn."
+                               Foreground="#CBD5E1"
+                               TextWrapping="Wrap"/>
+
+                    <TextBlock Text="Bundled third-party tools"
+                               FontSize="16"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="FrameOn bundles separate third-party command-line tools to provide download and conversion features. These tools are not owned by FrameOn and remain under their own licenses."
+                               Foreground="#CBD5E1"
+                               TextWrapping="Wrap"/>
+
+                    <TextBlock Text="yt-dlp"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="Bundled for media download support. FrameOn obtains the binaries and published checksums from the official yt-dlp project releases. yt-dlp is distributed under the Unlicense. Releases, source, and license information: https://github.com/yt-dlp/yt-dlp/releases"
+                               Foreground="#CBD5E1"
+                               TextWrapping="Wrap"/>
+
+                    <TextBlock Text="Deno"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="Bundled as the JavaScript runtime used by supported media-download workflows. FrameOn obtains the binaries from the official Deno project releases. Releases, source, and license information: https://github.com/denoland/deno/releases"
+                               Foreground="#CBD5E1"
+                               TextWrapping="Wrap"/>
+
+                    <TextBlock Text="FFmpeg and FFprobe"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="Bundled for audio/video conversion, probing, and container remuxing. FrameOn v1.0.4 uses checksum-verified Gyan Windows x64 builds and OpenPGP-verified Evermeet macOS Intel builds linked from FFmpeg's download page. These are third-party builds, not official FFmpeg-project binaries. The builds are GPL-family builds where marked by the platform package. Source and license information: https://ffmpeg.org"
+                               Foreground="#CBD5E1"
+                               TextWrapping="Wrap"/>
+
+                    <TextBlock Text="Bundled runtime dependencies"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="Some platform bundles include runtime dependencies used by yt-dlp, including Python/runtime libraries and packages such as curl_cffi and websockets. These dependencies keep their own open-source licenses, including MIT and BSD-style licenses where included."
+                               Foreground="#CBD5E1"
+                               TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Header="Terms of Use">
+                    <ScrollViewer Margin="0,12,0,0">
+                        <TextBlock x:Name="TermsTextBlock"
+                                   Foreground="#CBD5E1"
+                                   TextWrapping="Wrap"/>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Header="Privacy Policy">
+                    <ScrollViewer Margin="0,12,0,0">
+                        <TextBlock x:Name="PrivacyTextBlock"
+                                   Foreground="#CBD5E1"
+                                   TextWrapping="Wrap"/>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+
+            <Button x:Name="CloseButton"
+                    AutomationProperties.AutomationId="Licenses.Close"
+                    AutomationProperties.Name="Close Licenses"
+                    Grid.Row="3"
+                    Content="Close"
+                    Width="92"
+                    HorizontalAlignment="Right"/>
+        </Grid>
+    </Border>
+</Window>

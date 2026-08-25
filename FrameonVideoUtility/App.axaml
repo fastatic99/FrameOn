@@ -1,0 +1,157 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:FrameonVideoUtility"
+             x:Class="FrameonVideoUtility.App"
+             Name="FrameOn"
+             RequestedThemeVariant="Dark">
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+
+        <Style Selector="Window">
+            <Setter Property="Background" Value="#1E293B"/>
+        </Style>
+
+        <Style Selector="UserControl">
+            <Setter Property="Background" Value="#1E293B"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- Animated pill button shell -->
+        <Style Selector="Button.fill-button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="50"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+            <Setter Property="FocusAdorner" Value="{x:Null}"/>
+            <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.fill-button:pointerover">
+            <Setter Property="RenderTransform" Value="scale(1.03)"/>
+        </Style>
+
+        <Style Selector="Button.fill-button:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.95)"/>
+        </Style>
+
+        <Style Selector="Border.fill-button-surface">
+            <Setter Property="Background" Value="#4F6F95"/>
+            <Setter Property="CornerRadius" Value="50"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+        </Style>
+
+        <Style Selector="Button.fill-button:pointerover Border.fill-button-surface">
+            <Setter Property="Background" Value="#6D4BA8"/>
+        </Style>
+
+        <Style Selector="Border.fill-button-surface.secondary">
+            <Setter Property="Background" Value="#3B4F6A"/>
+        </Style>
+
+        <Style Selector="Button.fill-button:pointerover Border.fill-button-surface.secondary">
+            <Setter Property="Background" Value="#64748B"/>
+        </Style>
+
+        <Style Selector="Ellipse.fill-circle">
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="Height" Value="8"/>
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Width" Duration="0:0:0.35"/>
+                    <DoubleTransition Property="Height" Duration="0:0:0.35"/>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.fill-button:pointerover Ellipse.fill-circle">
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="Height" Value="130"/>
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+
+        <Style Selector="TextBlock.fill-button-text">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.25"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.fill-button:pointerover TextBlock.fill-button-text">
+            <Setter Property="Foreground" Value="#1E1B2E"/>
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="#1F2A3A"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="BorderBrush" Value="#4F6F95"/>
+        </Style>
+
+        <Style Selector="TextBox /template/ TextBlock.watermark">
+            <Setter Property="Foreground" Value="#80FFFFFF"/>
+        </Style>
+
+        <!-- Animated dropdown / ComboBox -->
+        <Style Selector="ComboBox">
+            <Setter Property="Background" Value="#1F2A3A"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#4F6F95"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.18"/>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.18"/>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="ComboBox:pointerover">
+            <Setter Property="Background" Value="#243447"/>
+            <Setter Property="BorderBrush" Value="#C084FC"/>
+            <Setter Property="RenderTransform" Value="scale(1.02)"/>
+        </Style>
+
+        <Style Selector="ComboBox:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.98)"/>
+        </Style>
+
+        <Style Selector="ComboBoxItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#1F2A3A"/>
+        </Style>
+
+        <Style Selector="ComboBoxItem:pointerover">
+            <Setter Property="Background" Value="#6D4BA8"/>
+        </Style>
+
+        <Style Selector="CheckBox">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="MenuItem">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+    </Application.Styles>
+</Application>

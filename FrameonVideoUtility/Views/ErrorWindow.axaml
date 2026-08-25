@@ -1,0 +1,176 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="FrameonVideoUtility.Views.ErrorWindow"
+        TransparencyLevelHint="Transparent"
+        ExtendClientAreaToDecorationsHint="True"
+        WindowDecorations="None"
+        CanResize="False">
+
+    <Window.Styles>
+
+        <!-- Button UI/animation shared with the app dialogs -->
+        <Style Selector="Button.update-pill-button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="50"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+            <Setter Property="FocusAdorner" Value="{x:Null}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+
+            <!-- Removes default Avalonia button rectangle/chrome -->
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"/>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.update-pill-button:pointerover">
+            <Setter Property="RenderTransform" Value="scale(1.03)"/>
+        </Style>
+
+        <Style Selector="Button.update-pill-button:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.95)"/>
+        </Style>
+
+        <Style Selector="Border.update-pill-surface">
+            <Setter Property="Background" Value="#4F6F95"/>
+            <Setter Property="CornerRadius" Value="50"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+        </Style>
+
+        <Style Selector="Border.update-pill-surface.secondary">
+            <Setter Property="Background" Value="#3B4F6A"/>
+        </Style>
+
+        <Style Selector="Border.update-pill-overlay">
+            <Setter Property="Background" Value="#C084FC"/>
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="CornerRadius" Value="50"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.22"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Border.update-pill-overlay.secondary">
+            <Setter Property="Background" Value="#94A3B8"/>
+        </Style>
+
+        <Style Selector="Button.update-pill-button:pointerover Border.update-pill-overlay">
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+
+        <Style Selector="TextBlock.update-pill-text">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.22"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.update-pill-button:pointerover TextBlock.update-pill-text">
+            <Setter Property="Foreground" Value="#1E1B2E"/>
+        </Style>
+
+    </Window.Styles>
+
+    <Border Background="#2F4058"
+            CornerRadius="16"
+            Padding="24">
+
+        <Grid RowDefinitions="Auto,Auto,*,Auto"
+              RowSpacing="16">
+
+            <!-- TITLE -->
+            <TextBlock x:Name="TitleText"
+                       Text="Error"
+                       FontSize="24"
+                       FontWeight="SemiBold"/>
+
+            <!-- MESSAGE -->
+            <StackPanel Grid.Row="1"
+                        Spacing="4">
+                <TextBlock x:Name="MessageText"
+                           Text="Something went wrong."
+                           Foreground="#CBD5E1"
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <!-- DETAILS -->
+            <Border Grid.Row="2"
+                    Background="#263648"
+                    CornerRadius="12"
+                    Padding="14"
+                    Margin="0,10,0,0">
+
+                <TextBlock x:Name="DetailsText"
+                           Text=""
+                           Foreground="#94A3B8"
+                           TextWrapping="Wrap"/>
+            </Border>
+
+            <!-- BUTTONS -->
+            <StackPanel Grid.Row="3"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Spacing="12">
+
+                <Button x:Name="RetryButton"
+                        AutomationProperties.AutomationId="Error.Retry"
+                        AutomationProperties.Name="Retry"
+                        Classes="update-pill-button"
+                        Width="180"
+                        Height="42">
+                    <Border Classes="update-pill-surface"
+                            Width="180"
+                            Height="42">
+                        <Grid ClipToBounds="True">
+                            <Border Classes="update-pill-overlay"/>
+                            <TextBlock Classes="update-pill-text"
+                                       Text="Retry"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </Button>
+
+                <Button x:Name="ExitButton"
+                        AutomationProperties.AutomationId="Error.Exit"
+                        AutomationProperties.Name="Exit"
+                        Classes="update-pill-button"
+                        Width="180"
+                        Height="42">
+                    <Border Classes="update-pill-surface secondary"
+                            Width="180"
+                            Height="42">
+                        <Grid ClipToBounds="True">
+                            <Border Classes="update-pill-overlay secondary"/>
+                            <TextBlock Classes="update-pill-text"
+                                       Text="Exit"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </Button>
+
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>
