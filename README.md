@@ -1,9 +1,5 @@
 # FrameOn VideoUtility
 
-<p align="center">
-  <img src="FrameonVideoUtility/FrameonVideoUtility/Assets/frameon_icon_master_cleaned_1024.png" alt="FrameOn VideoUtility" width="180">
-</p>
-
 FrameOn is a desktop media downloading and conversion application for Windows and macOS. It provides one interface around yt-dlp, FFmpeg, FFprobe and Deno.
 
 FrameOn can download online media, process prepared lists of video links, convert local audio and video files, and optimize videos for sharing or storage.
