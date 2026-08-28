@@ -1,215 +1,190 @@
 # FrameOn VideoUtility
 
 <p align="center">
-  <img src="FrameonVideoUtility/Assets/frameon_icon_master_cleaned_1024.png" alt="FrameOn VideoUtility" width="180">
+  <img src="FrameonVideoUtility/FrameonVideoUtility/Assets/frameon_icon_master_cleaned_1024.png" alt="FrameOn VideoUtility" width="180">
 </p>
 
-FrameOn VideoUtility is a desktop helper for downloading videos and converting audio/video files without making the workflow feel like a chore.
+FrameOn is a desktop media downloading and conversion application for Windows and macOS. It provides one interface around yt-dlp, FFmpeg, FFprobe and Deno.
+
+FrameOn can download online media, process prepared lists of video links, convert local audio and video files, and optimize videos for sharing or storage.
 
 ## Download 📦
 
-Download FrameOn from the [official FrameOn website](https://frameon.choatehome.com/#download).
+Download the latest signed release from the [official FrameOn website](https://frameon.choatehome.com/#download).
 
-Use the newest version shown on the release page. Older builds are mainly kept for troubleshooting.
+Older releases are retained primarily for troubleshooting and maintenance. Use the newest stable release unless you specifically need an earlier version.
 
 ### Windows
 
-Download the file ending in `.msix`. This installs FrameOn like a normal Windows app, adds it to the Start menu, and lets you remove it later from Windows Settings.
+1. Download the FrameOn file ending in `.msix`.
+2. Open the downloaded package and select `Install`.
+3. Launch FrameOn from the Start menu.
+4. On first launch, choose whether FrameOn should create a desktop shortcut.
 
-After installing, open FrameOn from the Start menu. On first launch, FrameOn asks whether you want a desktop shortcut. You can create one or skip it and continue using the Start menu.
-
-On first launch, FrameOn places the video tools it needs, such as `yt-dlp` and `ffmpeg`, into your Windows app data folder. They are kept there so the app starts faster after the first launch.
-
-#### If Windows Shows A Warning
-
-Windows may ask you to confirm the app the first time you install or open a new release. That is expected for new downloads.
-
-Before continuing, make sure:
-
-1. You downloaded FrameOn from the release page above.
-2. The file name starts with `FrameOn-VideoUtility-`.
-3. The file name ends with `.msix`.
-
-If those are true, choose `More info`, then `Run anyway` or `Install`. If the file came from anywhere else, delete it and download a fresh copy from the release page.
+FrameOn installs as a Windows application. It can be updated or removed later from Windows Settings.
 
 ### macOS
 
-Download the file ending in `.pkg`, then open it and follow the installer. The pkg installs FrameOn into Applications and places the required video tools in the system Application Support folder.
+1. Download the FrameOn file ending in `.pkg`.
+2. Open the package and follow the installer.
+3. Launch FrameOn from the Applications folder.
 
-## Source Code 🧰
+## Main Workspaces
 
-Want to inspect or build the public source? Browse the latest [source](https://github.com/fastatic99/FrameOn/tree/main).
+FrameOn separates its main operations into five workspaces.
 
-The public source archive removes private API and telemetry implementation files, then includes safe placeholders so the project can still build.
+### Download
 
-## Bundled Tool Provenance 🔍
+Use **Download** when you have one supported video URL.
 
-FrameOn v1.0.4 obtains Deno binaries from the official [Deno project releases](https://github.com/denoland/deno/releases) and obtains yt-dlp binaries and published checksums from the official [yt-dlp project releases](https://github.com/yt-dlp/yt-dlp/releases).
+1. Paste the video URL.
+2. Keep `MP4 (Recommended)` and `Auto`, or choose another available format and quality.
+3. Choose a destination folder.
+4. Select `Download`.
 
-FFmpeg and FFprobe come from platform builds linked by the [FFmpeg download page](https://ffmpeg.org/download.html): Gyan for Windows x64 and Evermeet for macOS Intel. FrameOn verifies the Windows package with its published SHA-256 digest and verifies the macOS packages with Evermeet's pinned OpenPGP signing key. These are third-party builds rather than official FFmpeg-project binaries; FFmpeg itself publishes source code. Each tool remains under its own license, and none of these upstream projects endorses FrameOn.
+The Download Summary shows the selected URL, format, quality, destination, and enabled advanced options.
 
-## Quick Help 🧭
+#### Advanced Options
 
-- Need install files? Start with [Download](#download-).
-- Want the source? See [Source Code](#source-code-).
-- App feels busy while converting? See [Performance Selector](#performance-selector-%EF%B8%8F).
-- Got an error message? Jump to [Troubleshooting Messages](#troubleshooting-messages-).
-- Want the app terms? See [License](LICENSE), [Terms of Use](TERMS_OF_USE.md), [Privacy](PRIVACY.md), and [Third-Party Notices](THIRD_PARTY_NOTICES.md).
+Advanced Options provide additional control over a single download:
 
-## Features ✨
+- Quality inspection
+- Filename handling
+- Selected-format preference
+- Subtitle downloading
+- Metadata retention
 
-- Download videos from supported URLs.
-- Choose download quality and output format.
-- Convert video files between common video formats.
-- Convert or extract audio into common audio formats.
-- Get installed app updates from inside FrameOn.
-- Save application logs from the Debug menu.
-- Choose a conversion performance mode to control ffmpeg CPU usage.
+The available media streams and final result still depend on what the source website provides.
 
-## How To Download A Video
+### Bulk Download
 
-1. Paste a supported video URL.
-2. Choose the file format. `MP4 (Recommended)` is the safest choice for most videos.
-3. Click `Download`.
-4. Choose where to save the file.
+Use **Bulk Download** when you have multiple video URLs stored in a prepared file.
 
-If the download fails, open the Debug window and review the latest `yt-dlp` messages.
+Supported import formats include:
 
-## App Updates
+- TXT
+- CSV
+- JSON
+- JSONL
+- M3U
+- M3U8
 
-FrameOn checks for updates when it opens. If an update is available, an `Update Available` button appears near the top of the app.
+To start a batch:
 
-On macOS, FrameOn uses the macOS update prompt to install the update.
+1. Select `Import from File`.
+2. Choose the prepared links file.
+3. Review the detected links.
+4. Choose the output format, batch quality, and batch speed.
+5. Choose a destination folder.
+6. Select `Download`.
 
-On Windows, FrameOn uses its built-in updater to download and install the newer version.
+FrameOn validates the imported links and places valid entries in the queue. The Queue Summary reports total, completed, running, queued, and failed items.
 
-## How To Convert Audio
+### Audio Converter
 
-1. In `Audio Converter`, click `Browse`.
-2. Select a supported audio or video file.
-3. Choose the output audio format.
-4. Click `Convert`.
-5. Choose the output folder.
+Use **Audio Converter** to convert a local audio file or extract audio from a local video.
 
-Video inputs can be converted to audio-only outputs.
+1. Browse for or drag in a supported audio or video file.
+2. Choose an output format such as MP3, AAC, M4A, WAV, FLAC, OGG, or Opus.
+3. Choose a destination folder.
+4. Select `Convert`.
 
-## How To Convert Video
+Enable `Bulk Operation` to select and convert multiple compatible files.
 
-1. In `Video Converter`, click `Browse`.
-2. Select a supported video file.
-3. Choose the output video format.
-4. Click `Convert`.
-5. Choose the output folder.
+### Video Converter
 
-## Performance Selector ⚙️
+Use **Video Converter** when the main goal is changing a local video's format for compatibility, such as converting AVI to MP4.
 
-Open `Settings` and choose `Conversion Impact`.
+1. Browse for or drag in a supported video file.
+2. Choose an output format such as MP4, MOV, AVI, WMV, MKV, FLV, or WebM.
+3. Choose the desired quality and destination folder.
+4. Select `Convert`.
 
-- `Auto - ffmpeg auto`: lets ffmpeg choose CPU thread usage. This is the default.
-- `Low Impact`: uses fewer CPU threads.
-- `Balanced`: uses about half of available CPU threads.
-- `High Impact`: uses more CPU threads.
-- `Max Impact`: uses all available CPU threads.
+Enable `Bulk Operation` to select and convert multiple compatible videos.
 
-Use `Low Impact` or `Balanced` if the computer feels busy while converting or downloading. Downloads can also use ffmpeg during merge/remux post-processing, so this setting can affect both conversions and some downloads.
+### Video Optimizer
 
-## Troubleshooting Messages 🔎
+Use **Video Optimizer** when the main goal is reducing file size or adjusting resolution, frame rate, codec, quality, or file format for sharing and storage.
 
-When something goes sideways, start here. Match the message you see in FrameOn, then follow the note underneath it.
+1. Select a video for inspection.
+2. Review the source information and preview.
+3. Choose the output settings.
+4. Keep `Never upscale` and `Preserve aspect ratio` enabled when appropriate.
+5. Choose a destination folder.
+6. Select `Optimize`.
 
-### Link And Format Messages
+The Optimization Summary compares the original video with the estimated or completed output.
 
-**`Please enter a video link.`**  
-The URL box is empty. Paste a video URL and try again.
+## Settings ⚙️
 
-**`Please enter a valid video URL.`**  
-The link is not a valid `http` or `https` URL. Check the link and paste the full address.
+Open **Settings** to configure application-wide behavior.
 
-**`Please select a valid output format.`**  
-A format header or blank option was selected. Choose an actual video or audio format from the dropdown.
+### General
 
-### Sign-In And Site Access Messages
+- Choose the workspace FrameOn opens to at startup.
+- Review the installed FrameOn version and bundled tool versions.
 
-**`This video appears to be age-restricted and may require sign-in.`**  
-The site may require age verification or a signed-in session. Confirm the video opens in your browser first.
+### Cookies
 
-**`This video appears to be private and cannot be downloaded.`**  
-The selected browser profile or account may not have access. Confirm the video opens in your browser first.
+Select a browser cookie profile only when a website requires an authenticated browser session.
 
-**`This video may require sign-in.`**  
-The site likely needs an authenticated browser session. Confirm the video opens in your browser first.
+> Browser cookies can grant access to signed-in website sessions. Select only a browser profile you trust and use this option only when a download requires it.
 
-**`HTTP 403 Forbidden: The video site refused access.`**
+FrameOn passes the selected browser profile to yt-dlp for the applicable download operation. If the chosen profile is unavailable, select another valid profile in Settings.
 
+### Performance
 
-### Network And Site Support Messages
+Hardware Acceleration controls video encoding and decoding for compatible Video Converter and Video Optimizer operations.
 
-**`This link does not appear to be a supported video URL.`**  
-The site or URL format was not recognized. Confirm the URL and check whether `yt-dlp` supports the site.
+- When disabled, FrameOn uses the CPU.
+- When enabled, FrameOn uses supported video hardware such as Apple VideoToolbox or an available platform encoder.
+- If compatible hardware processing fails, FrameOn can retry using the CPU.
 
-**`The video site could not be reached.`**  
-Network, DNS, VPN, firewall, or site availability may be blocking access. Check your connection and try again.
+Downloads and Audio Converter operations are not affected by this setting.
 
-### Conversion Messages
+### Updates
 
-**`Audio conversion failed. Check the selected file and try again.`**  
-The file may be corrupt, unsupported, locked, or unavailable. Choose the file again or try a different output format.
+FrameOn checks for application updates and exposes update controls in Settings. When an update is available, an `Update Available` indicator also appears in the main navigation.
 
-**`Video conversion failed. Check the selected file and try again.`**  
-The file may be corrupt, unsupported, locked, or unavailable. Choose the file again or try a different output format.
+### Appearance
 
-**`The selected file no longer exists.`**  
-The file was moved, deleted, or is on a disconnected drive. Browse for the file again.
+Choose a theme and accent color. The default appearance uses the Graphite theme with a violet accent.
 
-**`Download cancelled / conversion cancelled.`**  
-The active operation was cancelled. Temporary work files are cleaned up automatically when FrameOn closes normally. Start it again if needed.
+## Help and Support
 
-## FAQ
+For guides, frequently asked questions, error codes, and troubleshooting steps, visit the [FrameOn Help Center](https://frameon.choatehome.com/help/).
 
-### Why do I get HTTP 403 Forbidden for a video that opens in my browser?
+### Debug Tools
 
+Open the Debug menu to:
 
-### How do I uninstall FrameOn on Windows?
+- Open the Debug window
+- Save logs for troubleshooting
 
-Open `Settings > Apps > Installed apps`, find FrameOn, and choose `Uninstall`.
+Use `Report a Bug` in the footer when you need to report a problem. Review diagnostic information before sharing it because logs can contain URLs, local paths, and account or profile names.
 
-You can also remove it with PowerShell:
+## Updates
+
+FrameOn checks for updates when it opens and also supports manual checks from Settings.
+
+- On macOS, FrameOn uses the signed macOS update flow.
+- On Windows, FrameOn uses its built-in updater to download, verify, and install the signed package.
+
+## Uninstalling
+
+### Windows
+
+Open `Settings > Apps > Installed apps`, find FrameOn, and select `Uninstall`.
+
+You can also remove the installed package with PowerShell:
 
 ```powershell
 Get-AppxPackage *FrameOn* | Remove-AppxPackage
 ```
 
-Windows installs FrameOn as an MSIX app, so Windows keeps FrameOn's per-user tools, settings, and logs under the app package data folder. The package suffix can be different on each machine, so use this command to find it:
+### macOS
 
-```powershell
-Get-ChildItem "$env:LOCALAPPDATA\Packages" -Directory -Force |
-  Where-Object { $_.Name -like "FrameOn.VideoUtility_*" } |
-  Select-Object FullName
-```
-
-After first launch, the video tools are usually under:
-
-```powershell
-$env:LOCALAPPDATA\Packages\FrameOn.VideoUtility_*\LocalCache\Local\FrameOn\Tools\Windows X64
-```
-
-To fully clean up FrameOn's per-user Windows data after uninstalling, remove the matching package data folder:
-
-```powershell
-Get-ChildItem "$env:LOCALAPPDATA\Packages" -Directory -Force |
-  Where-Object { $_.Name -like "FrameOn.VideoUtility_*" } |
-  Remove-Item -Recurse -Force
-```
-
-FrameOn also creates temporary work folders while it downloads or converts files. They normally clean themselves up when the app closes. If the app is force-closed, you can remove leftovers here:
-
-```powershell
-Remove-Item "$env:TEMP\FrameOnSandbox" -Recurse -Force
-```
-
-### How do I uninstall FrameOn on macOS?
-
-Delete the app and remove the installed tools if you want a clean uninstall:
+Remove the application and installed support files if you want a complete uninstall:
 
 ```bash
 sudo rm -rf "/Applications/FrameOn.app"
@@ -218,13 +193,7 @@ sudo rm -rf "/Library/Logs/FrameOn"
 sudo pkgutil --forget com.choatehome.frameon
 ```
 
-The macOS installer places its video tools here:
-
-```bash
-/Library/Application Support/FrameOn/Tools/Macos (Silicon)
-```
-
-FrameOn may also have per-user settings, logs, or temporary files. Remove these only if you want to reset FrameOn completely for that macOS user:
+To remove per-user settings and logs as well:
 
 ```bash
 rm -rf "$HOME/Library/Application Support/FrameOn"
@@ -232,37 +201,30 @@ rm -rf "$HOME/Library/Logs/FrameOn"
 rm -rf "${TMPDIR:-/tmp}/FrameOnSandbox"
 ```
 
-Installing a newer pkg replaces the app and refreshes the tools.
+## Source Code 🧰
 
-## Logs 🧾
+Browse the latest [public FrameOn source](https://github.com/fastatic99/FrameOn/tree/main).
 
-Open `Debug > Open Debug Window` to view logs.
+### Build Locally
 
-Use `Debug > Save Logs` to export logs for troubleshooting. FrameOn also keeps a small rolling log on disk so recent app activity is still available after a restart.
-
-Use `Report a Bug` at the bottom of FrameOn to send a problem report.
-
-Windows log file:
-
-```powershell
-$env:LOCALAPPDATA\Packages\FrameOn.VideoUtility_*\LocalCache\Local\FrameOn\Logs\FrameOn.log
-```
-
-Find the exact Windows log path:
-
-```powershell
-Get-ChildItem "$env:LOCALAPPDATA\Packages" -Directory -Force |
-  Where-Object { $_.Name -like "FrameOn.VideoUtility_*" } |
-  ForEach-Object {
-    Get-ChildItem $_.FullName -Recurse -Force -Filter FrameOn.log -ErrorAction SilentlyContinue
-  } |
-  Select-Object FullName
-```
-
-macOS log file:
+Install the .NET 10 SDK, then run:
 
 ```bash
-$HOME/Library/Logs/FrameOn/FrameOn.log
+dotnet restore FrameonVideoUtility/FrameonVideoUtility.slnx
+dotnet build FrameonVideoUtility/FrameonVideoUtility.slnx
 ```
 
-Logs include high-level app actions, selected download quality and format mode, the generated `yt-dlp` selector, selected performance mode changes, tool preparation, and summarized process output.
+Bundled third-party tools are platform-specific. A local source build may require the expected tool files and integrity metadata before every media operation is available.
+
+## Legal
+
+- [License](FrameonVideoUtility/LICENSE.md)
+- [Terms of Use](FrameonVideoUtility/TERMS_OF_USE.md)
+- [Privacy Policy](FrameonVideoUtility/PRIVACY.md)
+- [Third-Party Notices](FrameonVideoUtility/THIRD_PARTY_NOTICES.md)
+
+## Support
+
+- [FrameOn website](https://frameon.choatehome.com/)
+- [Help Center](https://frameon.choatehome.com/help/)
+- Use `Report a Bug` inside FrameOn for application problems.
