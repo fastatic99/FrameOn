@@ -38,7 +38,7 @@ Download the file ending in `.pkg`, then open it and follow the installer. The p
 
 ## Source Code 🧰
 
-Want to inspect or build the public source? Browse the latest [sanitized public source](https://github.com/fastatic99/FrameOn/tree/main).
+Want to inspect or build the public source? Browse the latest [source](https://github.com/fastatic99/FrameOn/tree/main).
 
 The public source archive removes private API and telemetry implementation files, then includes safe placeholders so the project can still build.
 
